@@ -47,7 +47,8 @@ public:
 		ZLIB	= 2,
 		BZIP2	= 3,
 		LZO	= 4,
-		LZMA	= 5
+		LZMA	= 5,
+		LZ4	= 6,
 	};
 
 	CompressionType() :
@@ -59,6 +60,8 @@ public:
 			m_Type(BZIP2)
 #elif HAVE_LIBLZMA
 			m_Type(LZMA)
+#elif HAVE_LIBLZ4
+			m_Type(LZ4)
 #else
 			m_Type(NONE)
 #endif
@@ -83,6 +86,9 @@ public:
 #endif
 #ifndef HAVE_LIBLZMA
 		assert(type != LZMA);
+#endif
+#ifndef HAVE_LIBLZ4
+		assert(type != LZ4);
 #endif
 	}
 

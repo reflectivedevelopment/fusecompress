@@ -29,6 +29,9 @@
 #ifdef HAVE_LIBLZO2
 #include <boost/iostreams/filter/lzo.hpp>
 #endif
+#ifdef HAVE_LIBLZ4
+#include <boost/iostreams/filter/lz4_filter.hpp>
+#endif
 #include <boost/iostreams/filter/xor.hpp>
 #include <boost/iostreams/traits.hpp>
 
@@ -50,6 +53,9 @@ void CompressionType::printAllSupportedMethods(std::ostream& os)
 #endif
 #ifdef HAVE_LIBLZMA
 	os << "lzma, ";
+#endif
+#ifdef HAVE_LIBLZ4
+	os << "lz4, ";
 #endif
 	os << "xor";
 }
@@ -76,6 +82,9 @@ std::ostream& operator<<(std::ostream& os, const CompressionType& rObj)
 		break;
 	case CompressionType::LZMA:
 		name = "lzma";
+		break;
+	case CompressionType::LZ4:
+		name = "lz4";
 		break;
 	}
 	return os << name;
@@ -108,6 +117,11 @@ void CompressionType::push(io::filtering_stream<io::output>& fs) const
 #ifdef HAVE_LIBLZMA
 	case LZMA:
 		fs.push(io::lzma_compressor());
+		break;
+#endif
+#ifdef HAVE_LIBLZ4
+	case LZ4:
+		fs.push(io::lz4_compressor());
 		break;
 #endif
 	default:
@@ -149,6 +163,11 @@ void CompressionType::push(io::filtering_stream<io::input>& fs) const
 		fs.push(io::lzma_decompressor());
 		break;
 #endif
+#ifdef HAVE_LIBLZ4
+	case LZ4:
+		fs.push(io::lz4_decompressor());
+		break;
+#endif
 	default:
 	{
 		// If input file is using unsopported version
@@ -182,6 +201,10 @@ bool CompressionType::parseType(std::string type)
 #ifdef HAVE_LIBLZMA
 	else if (type == "lzma")
 		m_Type = LZMA;
+#endif
+#ifdef HAVE_LIBLZ4
+	else if (type == "lz4")
+		m_Type = LZ4;
 #endif
 	else
 		return false;

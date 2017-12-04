@@ -53,7 +53,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(man1dir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__objects_1 = lzma.$(OBJEXT) CompressionType.$(OBJEXT) \
+am__objects_1 = lzma.$(OBJEXT) lz4_filter.$(OBJEXT) CompressionType.$(OBJEXT) \
 	FileHeader.$(OBJEXT) CompressedMagic.$(OBJEXT) \
 	FileRememberTimes.$(OBJEXT) FileRememberXattrs.$(OBJEXT) \
 	FuseCompress.$(OBJEXT) File.$(OBJEXT) FileUtils.$(OBJEXT) \
@@ -220,6 +220,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 common = \
 	boost/iostreams/filter/lzma.cpp \
+	boost/iostreams/filter/lz4_filter.cpp \
 	CompressionType.cpp \
 	FileHeader.cpp \
 	CompressedMagic.cpp \
@@ -239,6 +240,7 @@ noinst_HEADERS = \
 	assert.h \
 	boost/iostreams/device/nonclosable_file_descriptor.hpp \
 	boost/iostreams/filter/lzma.hpp \
+	boost/iostreams/filter/lz4_filter.hpp \
 	boost/iostreams/filter/lzo.hpp \
 	boost/iostreams/filter/xor.hpp \
 	boost/archive/portable_binary_oarchive.hpp \
@@ -383,6 +385,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/LinearMap.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Memory.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lzma.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lz4_filter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main_offline.Po@am__quote@
 
@@ -413,6 +416,20 @@ lzma.obj: boost/iostreams/filter/lzma.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='boost/iostreams/filter/lzma.cpp' object='lzma.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o lzma.obj `if test -f 'boost/iostreams/filter/lzma.cpp'; then $(CYGPATH_W) 'boost/iostreams/filter/lzma.cpp'; else $(CYGPATH_W) '$(srcdir)/boost/iostreams/filter/lzma.cpp'; fi`
+
+lz4_filter.o: boost/iostreams/filter/lz4_filter.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT lz4_filter.o -MD -MP -MF $(DEPDIR)/lz4_filter.Tpo -c -o lz4_filter.o `test -f 'boost/iostreams/filter/lz4_filter.cpp' || echo '$(srcdir)/'`boost/iostreams/filter/lz4_filter.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/lz4_filter.Tpo $(DEPDIR)/lz4_filter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='boost/iostreams/filter/lz4_filter.cpp' object='lz4_filter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o lz4_filter.o `test -f 'boost/iostreams/filter/lz4_filter.cpp' || echo '$(srcdir)/'`boost/iostreams/filter/lz4_filter.cpp
+
+lz4_filter.obj: boost/iostreams/filter/lz4_filter.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT lz4_filter.obj -MD -MP -MF $(DEPDIR)/lz4_filter.Tpo -c -o lz4_filter.obj `if test -f 'boost/iostreams/filter/lz4_filter.cpp'; then $(CYGPATH_W) 'boost/iostreams/filter/lz4_filter.cpp'; else $(CYGPATH_W) '$(srcdir)/boost/iostreams/filter/lz4_filter.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/lz4_filter.Tpo $(DEPDIR)/lz4_filter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='boost/iostreams/filter/lz4_filter.cpp' object='lz4_filter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o lz4_filter.obj `if test -f 'boost/iostreams/filter/lz4_filter.cpp'; then $(CYGPATH_W) 'boost/iostreams/filter/lz4_filter.cpp'; else $(CYGPATH_W) '$(srcdir)/boost/iostreams/filter/lz4_filter.cpp'; fi`
 install-man1: $(dist_man_MANS)
 	@$(NORMAL_INSTALL)
 	test -z "$(man1dir)" || $(MKDIR_P) "$(DESTDIR)$(man1dir)"

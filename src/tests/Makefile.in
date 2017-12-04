@@ -54,7 +54,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am_print_compress_OBJECTS = print_compress.$(OBJEXT)
 print_compress_OBJECTS = $(am_print_compress_OBJECTS)
 am__DEPENDENCIES_1 =
-print_compress_DEPENDENCIES = ../lzma.o ../CompressionType.o \
+print_compress_DEPENDENCIES = ../lzma.o ../lz4_filter.o ../CompressionType.o \
 	../FileHeader.o ../CompressedMagic.o ../FileRememberTimes.o \
 	../FileRememberXattrs.o ../FuseCompress.o ../File.o \
 	../FileUtils.o ../Compress.o ../Memory.o ../FileManager.o \
@@ -64,7 +64,7 @@ print_compress_DEPENDENCIES = ../lzma.o ../CompressionType.o \
 	$(am__DEPENDENCIES_1)
 am_xattrs_OBJECTS = xattrs.$(OBJEXT)
 xattrs_OBJECTS = $(am_xattrs_OBJECTS)
-xattrs_DEPENDENCIES = ../lzma.o ../CompressionType.o ../FileHeader.o \
+xattrs_DEPENDENCIES = ../lzma.o ../lz4_filter.o ../CompressionType.o ../FileHeader.o \
 	../CompressedMagic.o ../FileRememberTimes.o \
 	../FileRememberXattrs.o ../FuseCompress.o ../File.o \
 	../FileUtils.o ../Compress.o ../Memory.o ../FileManager.o \
@@ -195,6 +195,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 xattrs_SOURCES = xattrs.cpp
 xattrs_LDADD = ../lzma.o \
+	../lz4_filter.o \
 	../CompressionType.o \
 	../FileHeader.o \
 	../CompressedMagic.o \
@@ -213,6 +214,7 @@ xattrs_LDADD = ../lzma.o \
 
 print_compress_SOURCES = print_compress.cpp
 print_compress_LDADD = ../lzma.o \
+	../lz4_filter.o \
 	../CompressionType.o \
 	../FileHeader.o \
 	../CompressedMagic.o \
