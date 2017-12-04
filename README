@@ -52,7 +52,7 @@ Problems:
 	This leak should be fixed with the newer 'file' package.
 
 Requires:
-	boost >= 1.33.1
+	boost >= 1.33.1 (I used 1.41.0, as 1.33.1 didn't work for me.)
 
 	libz
 	libbz2
